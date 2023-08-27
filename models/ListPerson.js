@@ -120,7 +120,7 @@ class ListPerson {
       item.maID === id;
       return item.maID === id;
     });
-    console.log(doiTuong)
+    // console.log(doiTuong)
     checkForm(doiTuong.doiTuong)
     if (doiTuong != undefined) {
       const arrField = document.querySelectorAll(

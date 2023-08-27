@@ -102,7 +102,7 @@ const layThongTinDoiTuong = (id) => {
 
 document.getElementById("btnThem").onmousedown = ()=>{
   checkForm("")
-  //onmousedown về coi lại
+
 }
 
 document.getElementById("btnCapNhat").onclick = () => {
