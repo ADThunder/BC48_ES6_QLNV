@@ -6,7 +6,7 @@ class ListPerson {
 
   themDoiTuong = (person) => {
     this.arrListPerson.push(person);
-    // console.log(this.arrListPerson);
+    console.log(this.arrListPerson);
     
   };
   renderDoiTuong = (idHienThi = "tbodyQLHV", arr = this.arrListPerson) => {
@@ -20,7 +20,7 @@ class ListPerson {
                         <td>${person.diaChi}</td>
                         <td>${person.email}</td>
                         <td>${
-                          person.doiTuong == "hocSinh" ? "Học sinh" : "Học sinh"
+                          person.doiTuong === "hocSinh" ? "Học sinh" : "Học sinh"
                         }</td>
                         <td>ĐTB: ${person.tinhDiemTrungBinh()}</td>
                         <td>
@@ -41,7 +41,7 @@ class ListPerson {
                         <td>${person.diaChi}</td>
                         <td>${person.email}</td>
                         <td>${
-                          person.doiTuong == "nhanVien"
+                          person.doiTuong === "nhanVien"
                             ? "Nhân viên"
                             : "Nhân viên"
                         }</td>
@@ -106,6 +106,7 @@ class ListPerson {
       item.maID === id;
       return item.maID === id;
     });
+    console.log(index)
     if (index != -1) {
       // console.log(this.arrListPerson)
       this.arrListPerson.splice(index, 1);
@@ -119,6 +120,8 @@ class ListPerson {
       item.maID === id;
       return item.maID === id;
     });
+    console.log(doiTuong)
+    checkForm(doiTuong.doiTuong)
     if (doiTuong != undefined) {
       const arrField = document.querySelectorAll(
         "#QLHVForm input, #QLHVForm select"

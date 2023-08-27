@@ -11,7 +11,7 @@ const themDoiTuong = (event) => {
   const arrField = document.querySelectorAll(
     "#QLHVForm input, #QLHVForm select"
   );
-  console.log(arrField)
+  // console.log(arrField)
   let person;
   const selectedInput = document.querySelector("#QLHVForm select").value;
   // console.log(selectedInput)
@@ -24,58 +24,69 @@ const themDoiTuong = (event) => {
   }
   for (let item of arrField) {
     const { id, value } = item;
-    if(value === "") {
-      alert("Vui lòng không để trống");
-    }    
-    if(selectedInput === "hocSinh") {
-      if(id === "hoTen" && !regexTen.test(value)) {
-        alert("Vui lòng nhập đúng định dạng họ tên Tiếng Việt")
+    console.log(id)
+    if (selectedInput === "hocSinh" && id !== "soNgayLam" && id !== "luongCanBan") {
+      if (value === "") {
+        alert("Vui lòng không bỏ trống");
         return
-      };
-      if(id === "maID" && !regexID.test(value)) {
+      }
+    } else if (selectedInput === "nhanVien" && id !== "diemToan" && id !== "diemLy" && id !== "diemHoa") {
+      if (value === "") {
+        alert('Vui lòng không bỏ trống')
+        return
+      }
+    }
+    if (value !== "" && selectedInput === "hocSinh" && id !== "soNgayLam" && id !== "luongCanBan") {
+      if (id === "maID" && !regexID.test(value)) {
         alert("Vui lòng nhập mã ID từ 4 đến 6 kí tự là số")
         return
       }
-      if(id === "email" && !regexEmail.test(value)) {
+      if (id === "hoTen" && !regexTen.test(value)) {
+        alert("Vui lòng nhập đúng định dạng họ tên Tiếng Việt")
+        return
+      }
+      if (id === "email" && !regexEmail.test(value)) {
         alert('Vui lòng nhập định dạng email hợp lệ');
         return
       };
-      if(id === "diemToan" && !regexDiem.test(value)) {
+      if (id === "diemToan" && !regexDiem.test(value)) {
         alert("Vui lòng nhập đúng định dạng điểm từ 0 đến 10")
         return
       };
-      if(id === "diemLy" && !regexDiem.test(value)) {
+      if (id === "diemLy" && !regexDiem.test(value)) {
         alert("Vui lòng nhập đúng định dạng điểm từ 0 đến 10")
         return
       };
-      if(id === "diemHoa" && !regexDiem.test(value)) {
+      if (id === "diemHoa" && !regexDiem.test(value)) {
         alert("Vui lòng nhập đúng định dạng điểm từ 0 đến 10")
         return
-      } else if (selectedInput === "nhanVien") {
-        if(id === "hoTen" && !regexTen.test(value)) {
-          alert("Vui lòng nhập đúng định dạng họ tên Tiếng Việt")
-          return
-        };
-        if(id === "maID" && !regexID.test(value)) {
-          alert("Vui lòng nhập mã ID từ 4 đến 6 kí tự là số")
-          return
-        }
-        if(id === "email" && !regexEmail.test(value)) {
-          alert('Vui lòng nhập định dạng email hợp lệ');
-          return
-        };
-        if(id === "soNgayLam" &&!regrexNgay.test(value) ) {
-          alert('Vui lòng nhập số ngày làm trong tháng hợp lệ')
-          return
-        }
-        if(id === "luongCanBan" && !regrexMoney.test(value)) {
-          alert("Vui lòng nhập đúng số tiền hợp lệ")
-          return
-        }
+      }
+    } else if (value !== "" && selectedInput === "nhanVien" && id !== "diemToan" && id !== "diemLy" && id !== "diemHoa") {
+      if (id === "hoTen" && !regexTen.test(value)) {
+        alert("Vui lòng nhập đúng định dạng họ tên Tiếng Việt")
+        return
+      };
+      if (id === "maID" && !regexID.test(value)) {
+        alert("Vui lòng nhập mã ID từ 4 đến 6 kí tự là số")
+        return
+      }
+      if (id === "email" && !regexEmail.test(value)) {
+        alert('Vui lòng nhập định dạng email hợp lệ');
+        return
+      };
+      if (id === "soNgayLam" && !regrexNgay.test(value)) {
+        alert('Vui lòng nhập số ngày làm trong tháng hợp lệ')
+        return
+      }
+      if (id === "luongCanBan" && !regrexMoney.test(value)) {
+        alert("Vui lòng nhập đúng số tiền hợp lệ")
+        return
       }
     }
-      person[id] = value; 
+
+    person[id] = value;
   }
+
   listPerson.themDoiTuong(person);
   document.getElementById("QLHVForm").reset();
   document.querySelector(".modal-footer .btn-secondary").click();
@@ -89,10 +100,16 @@ const layThongTinDoiTuong = (id) => {
   listPerson.layThongTinDoiTuong(id);
 };
 
+document.getElementById("btnThem").onmousedown = ()=>{
+  checkForm("")
+  //onmousedown về coi lại
+}
+
 document.getElementById("btnCapNhat").onclick = () => {
   const arrField = document.querySelectorAll(
     "#QLHVForm input, #QLHVForm select"
   );
+
   let person;
   const selectedInput = document.querySelector("#QLHVForm select").value;
   // console.log(selectedInput)
@@ -105,6 +122,8 @@ document.getElementById("btnCapNhat").onclick = () => {
     const { id, value } = item;
     person[id] = value;
   }
+  // checkForm()
+
   //tìm vị trí của nó trong mảng
   let index = listPerson.arrListPerson.findIndex((item) => {
     // console.log(item)
@@ -116,6 +135,7 @@ document.getElementById("btnCapNhat").onclick = () => {
     listPerson.arrListPerson[index] = person;
   }
   document.getElementById("QLHVForm").reset();
+  checkForm(doiTuongSelect.value)
   document.getElementById("btnThem").click();
   listPerson.renderDoiTuong();
   listPerson.luuLocalDoiTuong();
@@ -123,7 +143,7 @@ document.getElementById("btnCapNhat").onclick = () => {
 
 document.getElementById("selLoai").onchange = () => {
   const { value } = event.target;
-  // console.log(value)
+  console.log(value)
   let arrFilter = [];
   let arrHocSinh = [];
   let arrNhanVien = [];

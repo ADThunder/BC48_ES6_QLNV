@@ -17,3 +17,4 @@ class HocSinh extends Person {
     }
 }
 export default HocSinh;
+
